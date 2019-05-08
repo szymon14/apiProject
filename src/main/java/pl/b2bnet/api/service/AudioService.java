@@ -9,6 +9,7 @@ import pl.b2bnet.api.exception.NoSuchTagException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AudioService {
@@ -73,4 +74,11 @@ public class AudioService {
         }
         return names;
     }
+    public List<AudioTag> sortByReach(){
+        List<AudioTag> list = apiService.fromApi().stream()
+                .sorted((o1, o2) -> o1.getReach()-o2.getReach()).
+                        collect(Collectors.toList());
+        return list;
+    }
+
 }
